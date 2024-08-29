@@ -1,0 +1,109 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    margin: auto;
+    width: 90%;
+    max-width: 1320px;
+    background-color: antiquewhite;
+}
+
+#s1_topic{
+    padding: 15px;
+    margin-top: 0px;
+    text-align: center;
+    font-size: xx-large;
+    background-color: rgb(199, 238, 81);
+}
+
+#s1_input1, #s1_input2{
+    display: block;
+    padding: 15px; 
+    width: 26%;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border-color: brown;
+    margin-left: 15px
+}
+
+#s1_input1:hover, #s1_input1:active, #s1_input2:hover, #s1_input2:active{
+    border-width: 0;
+    border-color: red;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 5px;
+}
+.s1_submit{
+    background-color: rgb(57, 244, 244);
+    padding: 10px;
+    font-size: medium;
+    border: none;
+    width: 10%;
+    border-radius: 10px;
+    margin-left: 15px
+}
+
+/* *********** S2 ************ */
+#visualizer{
+    height: 63vh;
+    background-color: aqua ;
+}
+#list{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    
+}
+.box{
+    list-style: none;
+    border-radius: 5px;
+    border: 3px solid rgb(240, 129, 25);
+    padding: 20px 0px;
+    width: 4%;
+    text-align: center;
+    font-size: 20px;
+margin-top: 50px;
+}
+
+
+/* *********** S3 ************ */
+#s3{
+    padding: 30px 80px 30px 30px;
+    
+}
+#p1{
+    line-height: 28px;
+    
+}
+h2{
+    color: rgb(60, 165, 251);
+    margin-bottom: 10px;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-top: 50px;
+    text-align: center;
+}
+p{  color: black;
+    font-weight: 500;
+    font-size: 21px;
+     display: inline;
+}
+h3{
+    font-size: 21px;
+     line-height: 10px;
+     color: rgb(62, 134, 192);
+     position: relative;
+     left: 8%;
+ 
+}
+
+#iframe_div{
+    margin-top: 40px;
+}
+iframe{
+    
+    border-radius: 30px;
+    display: block;
+    margin: auto;
+}

@@ -1,12 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Binary Search</title>
+    <link rel="stylesheet" href="./Algo_CSS/BinarySearch.css">
 </head>
+
 <body>
-    <h1>Binary Search Algo</h1>
+    <header>
+        <nav></nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Abhishek -->
+            <section id="s1">
+                <h1 id="s1_topic">Binary Search</h1>
+                <form action="#" class="form">
+                    <input type="text" name="user-input" id="s1_input1" placeholder="Enter an Array (comma Separated)"
+                        required>
+                    <input type="number" name="user-input" id="s1_input2" placeholder="Target value" required>
+
+                    <input type="submit" value="Find Pairs" class="s1_submit">
+                </form>
+            </section><!-- section1 -->
+
+            <section id="s2"><!-- section2 -->
+                <div id="visualizer">
+                   
+                    <ul id="list">
+
+                    </ul>
+                </div>
+
+                <section id="s3"><!-- section3 -->
+                    <div id="description">
+                        <h2>overview</h2>
+                        <p id="p1">The Two Pointer technique is a fundamental concept in computer science used for
+                            solving problems that involve searching or processing elements in an array or list. This
+                            technique utilizes two pointers that
+                            traverse the data structure from different ends or positions to efficiently solve a variety
+                            of problems.
+                            It is particularly useful for problems involving sorted arrays and for optimizing the time
+                            complexity of
+                            algorithms.</p>
+
+                        <h2>What is Two Pointer Technique?</h2>
+                        <p id="p1">The Two Pointer technique is an algorithmic strategy where two pointers are used to
+                            iterate through an
+                            array or list from different starting points, typically from the beginning and the end. This
+                            method is
+                            effective for solving problems such as finding pairs that meet certain criteria, merging
+                            sorted arrays,
+                            and more.</p>
+
+<div id="iframe_div">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/MHf6awe89xw?si=G0w6OzuupRRELy9V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+                        <h2>Basic Operations of Two Pointer Technique?</h2>
+                        <h3>Initialize Pointers:<p>Set two pointers at the desired starting positions, usually at the
+                                beginning and
+                                end of the array.</p>
+                        </h3>
+                        <h3>Move Pointers:<p> Adjust the pointers based on the problem's requirements, such as moving
+                                one pointer
+                                forward and the
+                                other backward.</p>
+                        </h3>
+                        <h3>Check Condition:<p>Evaluate the condition or criteria for the current elements pointed to by
+                                the two
+                                pointers.</p>
+                        </h3>
+                        <h3>Update Pointers:<p> Modify the positions of the pointers based on the result of the
+                                condition check.</p>
+                        </h3>
+
+
+
+                        <h2>Properties of Two Pointer</h2>
+                        <h3>Efficiency:<p>Reduces the time complexity of problems by eliminating the need for nested
+                                loops.</p>
+                        </h3>
+
+                        <h3>Simplicity: <p>Easy to implement and understand for many common problems.</p>
+                        </h3>
+
+                        <h3>Versatility: <p>Applicable to a wide range of problems involving sorted and unsorted arrays.
+                            </p>
+                        </h3>
+
+
+                        <h2>Applications of Two Pointer</h2>
+                        <h3>Finding Pairs:<p>Identifying pairs of elements that sum to a specific target.</p>
+                        </h3>
+
+                        <h3>Merge Sorted Arrays:<p>Combining two sorted arrays into one sorted array.</p>
+                        </h3>
+
+                        <h3>Partitioning:<p>Dividing an array into parts based on certain conditions.</p>
+                        </h3>
+
+                        <h3>Palindrome Checking:<p>Determining if a string is a palindrome by comparing characters from
+                                both ends.
+                            </p>
+                        </h3>
+
+                        <h3>Interval Problems:<p>Solving problems that involve overlapping intervals or ranges. </p>
+                        </h3>
+
+
+                        <h2>Advantages of Using Two Pointer</h2>
+                        <h3>Optimized Performance: <p>Significantly reduces time complexity compared to brute-force
+                                methods.</p>
+                        </h3>
+
+                        <h3>Simple Implementation: <p>Straightforward to code and debug.</p>
+                        </h3>
+
+                        <h3>Memory Efficient:<p> Typically requires constant space, making it space efficient. </p>
+                        </h3>
+
+
+                        <h2>Disadvantages of Using Two Pointer</h2>
+                        <h3>Limited to Specific Problems:<p>Not suitable for problems that do not fit the two-pointer
+                                paradigm.</p>
+                        </h3>
+
+                        <h3>Sorted Data Requirement:<p>Often requires the data to be sorted, which may involve
+                                additional
+                                preprocessing.</p>
+                        </h3>
+
+
+                        <h2>Two Pointer Variations</h2>
+                        <h3>Fixed Distance Pointers: <p>Pointers move in a fixed pattern relative to each other.</p>
+                        </h3>
+
+                        <h3>Opposite Direction Pointers: <p>Pointers start at opposite ends and move towards each other.
+                            </p>
+                        </h3>
+
+                        <h3>Same Direction Pointers:<p>Pointers move in the same direction but at different speeds or
+                                steps.</p>
+                        </h3>
+
+
+                        <h2>Real-World Examples of Two Pointer</h2>
+                        <h3>Array Pair Sum: <p>Finding pairs of numbers in an array that add up to a specific sum.</p>
+                        </h3>
+
+                        <h3>Interval Merging:<p>Combining overlapping intervals in scheduling or booking systems.</p>
+                        </h3>
+
+                        <h3>String Processing:<p>Checking if a string is a palindrome or finding substrings that match a
+                                given
+                                pattern.</p>
+                        </h3>
+
+                        <h3>Sorting and Merging:<p>Merging sorted files or datasets efficiently.</p>
+                        </h3>
+
+                        <h3>Two-Sum Problem:<p>Solving the classic two-sum problem efficiently.</p>
+                        </h3>
+
+
+                    </div>
+
+
+                </section>
+
+        </div> <!-- container -->
+    </main><!-- Abhishek  -->
 </body>
+
 </html>
 
+
+
+
+<script>
+    let formsubmit = document.querySelector(".form").addEventListener("submit", datafn)
+    let arr = [];
+    let arrayboxex = document.querySelector("#list");
+    let visualizer = document.querySelector("#visualizer");
+
+
+    function datafn() {
+        event.preventDefault();
+        
+        let userArray = document.querySelector("#s1_input1").value;
+        let target = document.querySelector("#s1_input2").value;
+
+        arr.push(userArray);
+        console.log(arr);
+        arr = arr[0].split(",").map(Number);
+        n = arr.length;
+        
+        boxexfn(arr, n);
+        
+
+
+        console.log(typeof arr[0] , arr,n);
+        // let narray = userArray.map(Number);
+        // console.log(narray);
+    }
+
+    let boxexfn = (arr, n) =>{
+            arr.map(ele =>{
+               let box= document.createElement("li")
+               box.className = "box";
+               box.innerText = ele;
+               arrayboxex.append(box)
+            })
+            visualizer.append(arrayboxex)
+        }
+
+</script>
