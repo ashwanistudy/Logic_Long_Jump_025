@@ -34,7 +34,7 @@ body{
     border-color: red;
     box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 5px;
 }
-.s1_submit{
+.s1_submit, .reset{
     background-color: rgb(57, 244, 244);
     padding: 10px;
     font-size: medium;

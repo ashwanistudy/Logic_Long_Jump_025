@@ -24,6 +24,7 @@
                     <input type="number" name="user-input" id="s1_input2" placeholder="Target value" required>
 
                     <input type="submit" value="Find Pairs" class="s1_submit">
+                    <button class="reset"> Reset</button>
                 </form>
             </section><!-- section1 -->
 
@@ -34,7 +35,7 @@
 
                     </ul>
                 </div>
-
+            </section>
                 <section id="s3"><!-- section3 -->
                     <div id="description">
                         <h2>overview</h2>
@@ -181,10 +182,13 @@
 
 
 <script>
+
     let formsubmit = document.querySelector(".form").addEventListener("submit", datafn)
     let arr = [];
     let arrayboxex = document.querySelector("#list");
     let visualizer = document.querySelector("#visualizer");
+    let reset = document.querySelector(".reset");
+
 
 
     function datafn() {
@@ -216,5 +220,8 @@
             })
             visualizer.append(arrayboxex)
         }
+
+
+// ================Reset==================
 
 </script>
