@@ -1,53 +1,125 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 *{
-    padding: 0px;
-    margin: 0px;
+    font-family: "Open Sans", system-ui;
+    margin: 0;
+    padding: 0;
 }
 body{
-    font-family: "Open Sans", sans-serif;
-    width: 100vw;
-    height: 100vh;
-    padding: 1rem;
-    background-color: rgb(72, 72, 105);
-    box-sizing: border-box;
-        background-image: url("https://c8.alamy.com/comp/T5FC7K/wallpaper-of-tech-concept-pattern-and-big-data-structurenet-and-source-code3d-illustration-T5FC7K.jpg");
+    background-color: rgba(128, 128, 128, 0.363);
+}
+#main{
+    margin: auto;
+    max-width: 1320px;
+}
+nav{
+    background-color: black;
+    width: 100%;
+    height: 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav>img{
+    width: 7rem;
+    height: 6rem;
+    margin-left: 3rem;
+}
+nav>p{
+    color: white;
+    display: inline;
+    font-size: 2rem;
+    display: flex;
+    text-align: center;
+    border-radius: .3rem;
+    font-weight: 700;
+}
+nav>p:nth-of-type(1){
+    background: linear-gradient(45deg, rgb(76, 76, 216), rgb(209, 54, 54));
+    padding: 0 1rem 0 1rem;
+}
+nav>p:nth-of-type(2){
+    margin-right: 5rem;
+    padding: 0 1rem 0 1rem;
+    background: linear-gradient(45deg, rgb(183, 185, 41), rgba(255, 174, 0, 0.705));
+}
+header{
+    width: 100%;
+    background-image: url("./images/header.jpg");
     background-position: center;
-    background-size: cover;
+    /* background-size: cover; */
+}
+header>h1{
+    text-align: center;
+    font-weight: 800;   
+    font-size: 1.5rem;
+}
+header>h1:nth-of-type(1){
+    font-size: 4rem;
+    color: rgb(231, 21, 49);
+}
+header>h1:nth-of-type(2){
+    color: #fc6006;
 }
 #container{
     margin: auto;
     width: 90%;
-    height: 80%;
     display: grid;
     grid-template-columns: repeat(5,1fr);
-    grid-template-rows: repeat(2,1fr);
+    grid-template-rows: repeat(2,20rem);
     gap: 1rem;
-
 }
 #container>div{
-    background-color: rgb(117, 17, 163);
-    border-radius: 1rem;
+    border-radius: .5rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba(0, 255, 255, 0.493);
 }
 #container>div>a{
-    background-color: rgb(0, 183, 255);
+    background-color: #b84f13;
     cursor: pointer;
     font-size: 1.5rem;
-    padding: 1rem;
-    border-radius: .5rem;
-    color: black;
+    color: rgb(16, 231, 99);
     text-decoration: none;
     font-weight: 600;
+    width: 100%;
+    height: 20%;
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 #container>div>a:hover{
-    background-color: rgb(0, 225, 255);
+    background-color: #f75e06;
 }
-#container>div:nth-of-type(1){
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Merge_sort_algorithm_diagram.svg/300px-Merge_sort_algorithm_diagram.svg.png");
-    background-position: center;
-    background-size: cover;
+#container>div>div{
+    width: 100%;
+    height: 80%;
+    background-color: white ;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
 }
+#container>div>div>img{
+    width: 80%;
+    height: 80%;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+
+}
+footer{
+    background-color: black;
+
+}
+footer>p{
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    padding-bottom: 2rem;
+}
+
+
