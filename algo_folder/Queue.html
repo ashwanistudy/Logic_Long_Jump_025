@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Queue Data Structure</title>
     <link rel="stylesheet" href="./algo_style.css" />
     <link
       rel="stylesheet"
@@ -25,14 +25,8 @@
         padding: 0.5rem 1rem;
         background-color: navajowhite;
         font-size: 1.5rem;
-      }
-      #first > span:nth-of-type(1) {
-        border-top-left-radius: 0.5rem;
-        border-bottom-left-radius: 0.5rem;
-      }
-      #first > span:nth-last-of-type(1) {
-        border-top-right-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
+        border-radius: 0.5rem;
+        margin: 0.2rem;
       }
       #second {
         width: 95%;
@@ -44,26 +38,29 @@
       input {
         width: 5rem;
         height: 2rem;
-        padding: 1.5rem;
-        font-size: 2rem;
-        border: none;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        border: 2px solid #1d2b53;
         border-radius: 0.5rem;
       }
       button {
-        padding: 1rem 2rem 1rem 2rem;
-        margin-left: 2rem;
-        font-size: 2rem;
+        padding: 1rem 2rem;
+        margin-left: 1rem;
+        font-size: 1.5rem;
         font-weight: 600;
-        background-color: rgba(0, 128, 0, 0.747);
+        background-color: #7e2553;
+        color: white;
         cursor: pointer;
         border-radius: 0.5rem;
         border: none;
+        transition: background-color 0.3s, transform 0.3s;
       }
       button:hover {
-        background-color: rgb(6, 206, 6);
+        background-color: #ff004d;
+        transform: scale(1.05);
       }
-      #second > form > button {
-        margin-left: 0;
+      button:active {
+        transform: scale(0.95);
       }
       #third {
         background-color: white;
@@ -79,6 +76,35 @@
       #third > span {
         font-size: 1.5rem;
         font-weight: 600;
+      }
+      #fourth {
+        width: 95%;
+        margin: auto;
+        padding: 2rem;
+        background-color: #faef5d;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #1d2b53;
+        text-align: center;
+        position: relative;
+        bottom: 0;
+      }
+      #fourth .info {
+        max-width: 800px;
+        margin: auto;
+      }
+      #fourth h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      #fourth h3 {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+      }
+      #fourth p {
+        font-size: 1.2rem;
+        line-height: 1.5;
       }
     </style>
   </head>
@@ -109,57 +135,73 @@
         <button id="peek">Peek</button>
       </section>
       <!-- Second Section end -->
+      
+      <!-- Fourth Section start -->
+      <section id="fourth">
+        <div class="info">
+          <h2>Queue Data Structure</h2>
+          <p>
+            A queue is a linear data structure that follows the First In, First Out (FIFO) principle. Elements are added at the end (rear) of the queue and removed from the front. This structure is analogous to a line of people waiting for service.
+          </p>
+          <h3>Operations</h3>
+          <p>
+            1. Enqueue: Add an element to the rear of the queue.<br>
+            2. Dequeue:Remove an element from the front of the queue.<br>
+            3. Peek:View the element at the front of the queue without removing it.
+          </p>
+          <h3>Use Cases</h3>
+          <p>
+            Queues are used in various applications such as scheduling tasks in operating systems, handling requests in web servers, and in breadth-first search algorithms.
+          </p>
+        </div>
+      </section>
+      <!-- Fourth Section end -->
     </div>
+    <script src="./algo_scripts.js"></script>
+    <script>
+      let arr = [];
+
+      document.getElementById("form").addEventListener('submit', input);
+      document.getElementById("pop").addEventListener('click', poped);
+      document.getElementById("peek").addEventListener('click', peeked);
+
+      function input(event) {
+        event.preventDefault();
+        let val = document.getElementById("push").value;
+        arr.push(val);
+        if (arr.length > 0) {
+          show();
+        }
+        document.getElementById("third").innerHTML = "";
+        document.getElementById("third").innerHTML = `<span>Enqueued: ${val}</span>`;
+      }
+
+      function show() {
+        document.getElementById('first').innerHTML = "";
+        arr.forEach(ele => {
+          let stack = document.createElement("span");
+          stack.innerHTML = `${ele}`;
+          let vision = document.getElementById('first');
+          vision.appendChild(stack);
+        });
+      }
+
+      function poped() {
+        if (arr.length > 0) {
+          let res = arr.shift();
+          document.getElementById("third").innerHTML = "";
+          document.getElementById("third").innerHTML = `<span>Dequeued: ${res}</span>`;
+        }
+        show();
+      }
+
+      function peeked() {
+        if (arr.length > 0) {
+          let res = arr[0];
+          document.getElementById("third").innerHTML = "";
+          document.getElementById("third").innerHTML = `<span>First Element: ${res}</span>`;
+        }
+      }
+    </script>
   </body>
-</html><script src="./algo_scripts.js"></script>
-
-<script>
-
-  let arr=[]
-
-  document.getElementById("form").addEventListener('submit', input)
-  document.getElementById("pop").addEventListener('click', poped)
-  document.getElementById("peek").addEventListener('click', peeked)
-
-
-  function input(){
-    event.preventDefault()
-    let val = document.getElementById("push").value
-    arr.push(val)
-    if (arr.length >0){
-      show()
-    }
-    document.getElementById("third").innerHTML=""
-    document.getElementById("third").innerHTML=`<span>Enqueued: ${val}</span>`
-  }
-
-
-  function show(){
-    document.getElementById('first').innerHTML=""
-    arr.forEach( (ele)=>{
-      let stack=document.createElement("span")
-      stack.innerHTML=`${ele}`
-      let vision = document.getElementById('first')
-      vision.appendChild(stack)
-    }
-
-    )
-  }
-  
-function poped(){
-  if (arr.length >0){
-    let res=arr.shift()
-    document.getElementById("third").innerHTML=""
-    document.getElementById("third").innerHTML=`<span>Dequeued: ${res}</span>`
-  }
-  show()
-}
-
-function peeked(){
-  if (arr.length >0){
-    let res=arr[0]
-    document.getElementById("third").innerHTML=""
-    document.getElementById("third").innerHTML=`<span>First Element: ${res}</span>`
-  }
-}
-</script>
+</html>
