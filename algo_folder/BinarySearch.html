@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binary Search</title>
+    <title>Binary Search</title> 
     <link rel="stylesheet" href="./Algo_CSS/BinarySearch.css">
 </head>
-
 <body>
     <header>
         <nav></nav>
@@ -17,13 +20,15 @@
         <div class="container">
             <!-- Abhishek -->
             <section id="s1">
-                <h1 id="s1_topic">Binary Search</h1>
+                <h1 id="s1_topic">Binary Search</h1><a href="./Two_Pointer.html">2pointer</a>
                 <form action="#" class="form">
                     <input type="text" name="user-input" id="s1_input1" placeholder="Enter an Array (comma Separated)"
                         required>
                     <input type="number" name="user-input" id="s1_input2" placeholder="Target value" required>
 
-                    <input type="submit" value="Find Pairs" class="s1_submit">
+                    <input type="submit" value="Find Target" class="s1_submit">
+                    <button id="reset">Reset</button>
+
                 </form>
             </section><!-- section1 -->
 
@@ -31,9 +36,11 @@
                 <div id="visualizer">
 
                     <ul id="list">
-
                     </ul>
                 </div>
+                <div>
+                    <h2 id="text"></h2>
+                  </div>
 </section>
                 <section id="s3"><!-- section3 -->
                     <div id="description">
@@ -154,7 +161,7 @@
                    
 
  </div>
-  </section>              
+  </section>   
 
         </div> <!-- container -->
     </main><!-- Abhishek  -->
@@ -166,32 +173,29 @@
 
 
 <script>
+
     let formsubmit = document.querySelector(".form").addEventListener("submit", datafn)
-    let arr = [];
     let arrayboxex = document.querySelector("#list");
     let visualizer = document.querySelector("#visualizer");
-
+    let ans = document.querySelector("#text");
 
     function datafn() {
         event.preventDefault();
 
+        arrayboxex.innerHTML = ""
+        let arr = [];
         let userArray = document.querySelector("#s1_input1").value;
         let target = document.querySelector("#s1_input2").value;
-
+        target = Number(target);
         arr.push(userArray);
-        console.log(arr);
         arr = arr[0].split(",").map(Number);
+        arr.sort((a, b) => a - b);
         n = arr.length;
-
         boxexfn(arr, n);
-
-
-
-        console.log(typeof arr[0], arr, n);
-        // let narray = userArray.map(Number);
-        // console.log(narray);
+        binarysearch(arr, n, target);
     }
 
+    //====================Boxex===========================
     let boxexfn = (arr, n) => {
         arr.map(ele => {
             let box = document.createElement("li")
@@ -201,5 +205,59 @@
         })
         visualizer.append(arrayboxex)
     }
+
+
+    // ===============Two Pointerfn==================
+    let timeout = 1500; 
+
+function binarysearch(arr, n, target) {
+    let low = 0;
+    let high = n - 1;
+    
+    function updateVisualizer(mid, delay) {
+        setTimeout(() => {
+            arrayboxex.querySelectorAll('.box').forEach(box => box.classList.remove('highlight-low', 'highlight-high', 'highlight-mid'));
+            
+            if (low < arr.length) arrayboxex.querySelectorAll('.box')[low]?.classList.add('highlight-low');
+            if (high < arr.length) arrayboxex.querySelectorAll('.box')[high]?.classList.add('highlight-high');
+            if (mid < arr.length) arrayboxex.querySelectorAll('.box')[mid]?.classList.add('highlight-mid');
+            
+            ans.innerText = `Low: ${low}, High: ${high}, Mid: ${mid}, Mid Value: ${arr[mid]}`;
+        }, delay);
+    }
+
+    function step() {
+        if (low > high) {
+            return setTimeout(() => {
+                ans.innerText = `Element Not Present in Array.`;
+            }, timeout);
+        }
+
+        const mid = Math.floor((low + high) / 2);
+        updateVisualizer(mid, timeout);
+
+        setTimeout(() => {
+            if (arr[mid] === target) {
+                ans.innerText = `Element Found At Index : ${mid}`;
+            } else if (arr[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+            step(); 
+        }, timeout);
+    }
+
+    step(); 
+}
+
+
+// ===============Reset==================
+let resetfn = ()=>{
+        arr = []
+        
+        window.location.reload();
+     }
+     reset.addEventListener("click", resetfn)
 
 </script>
