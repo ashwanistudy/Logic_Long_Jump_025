@@ -1,1 +1,0 @@
-# Logic_Long_Jump_025
