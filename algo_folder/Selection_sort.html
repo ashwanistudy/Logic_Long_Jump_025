@@ -10,18 +10,28 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <style>
-      /* Existing CSS styles */
+      body {
+        font-family: 'Century Gothic', sans-serif;
+        background-color: rgba(128, 128, 128, 0.363);
+        margin: 0;
+        padding: 0;
+        color: #1d2b53;
+      }
+      
+      /* First section */
       #first {
         width: 95%;
         height: 20rem;
-        background-color: white;
+        background-color: rgba(96, 64, 147, 0.706);
         margin: auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-wrap: nowrap; /* Change from wrap to nowrap */
+        flex-wrap: nowrap;
         position: relative;
-        overflow-x: auto; /* Allow horizontal scrolling if necessary */
+        overflow-x: auto;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
       #first > span {
         padding: 0.5rem 1rem;
@@ -30,12 +40,19 @@
         margin: 0.5rem;
         text-align: center;
         line-height: 2rem;
-        transition: transform 0.5s ease, background-color 0.5s ease;
+        transition: transform 0.5s ease, background-color 0.5s ease,
+          background-color 0.3s ease;
         z-index: 1;
-        display: inline-block; /* Ensure they are displayed inline */
+        position: relative;
+      }
+
+      #first > span:hover {
+        background-color: #ff004d; 
+        transform: scale(1.1); 
       }
       .current-min {
-        background-color: #FF004D;
+        background-color: #ff004d;
+        color: white;
         z-index: 2;
       }
       .lifted {
@@ -66,60 +83,73 @@
           transform: scale(1);
         }
       }
+
+      /* Second section */
       #second {
         width: 95%;
         margin: auto;
         display: flex;
-        justify-content: center;
+        align-items: center; /* Align items vertically */
+        gap: 1rem; /* Space between items */
         margin-top: 1rem;
       }
+      #second form {
+        display: flex;
+        align-items: center;
+        gap: 1rem; /* Space between input and button */
+      }
       input {
-        width: 5rem;
+        width: 20rem; /* Wider input box */
         height: 2rem;
-        padding: 1.5rem;
-        font-size: 2rem;
-        border: none;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        border: 2px solid #1d2b53;
         border-radius: 0.5rem;
+        background-color: #f0f0f0;
       }
       button {
-        padding: 1rem 2rem;
-        margin-left: 1rem;
-        font-size: 2rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
         font-weight: 600;
         background-color: rgba(0, 128, 0, 0.747);
         cursor: pointer;
         border-radius: 0.5rem;
-        border: none;
+        border: 2px solid #1d2b53;
+        color: white;
+        transition: background-color 0.3s ease;
       }
       button:hover {
         background-color: rgb(6, 206, 6);
       }
+
+      /* Third section */
       #third {
-        background-color: white;
-        width: 95%;
-        height: 5rem;
-        margin: auto;
-        border-bottom-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      #third > span {
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
+        background: linear-gradient(90deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%); 
+      width: 95%;
+      height: 5rem;
+      margin: 2rem auto; 
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #third > span {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+      /* Fourth section */
       #fourth {
         width: 95%;
         margin: auto;
         padding: 2rem;
-        background-color: #faef5d;
+        background-color: antiquewhite;
         border-radius: 0.5rem;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         color: #1d2b53;
         text-align: center;
-        position: relative;
-        bottom: 0;
+        margin-top: 2rem;
       }
       #fourth .info {
         max-width: 800px;
@@ -160,11 +190,12 @@
       <!-- Second Section start -->
       <section id="second">
         <form id="form">
-          <input type="number" required id="push" placeholder="0" />
+          <input type="text" required id="push" placeholder="Enter numbers separated by commas" />
           <button type="submit">Add</button>
         </form>
         <button id="sort-asc">Sort Ascending</button>
         <button id="sort-desc">Sort Descending</button>
+        <button id="generate-array">Generate Random Array</button>
       </section>
       <!-- Second Section end -->
       
@@ -201,21 +232,22 @@
       document.getElementById("form").addEventListener('submit', input);
       document.getElementById("sort-asc").addEventListener('click', () => sort('asc'));
       document.getElementById("sort-desc").addEventListener('click', () => sort('desc'));
+      document.getElementById("generate-array").addEventListener('click', generateArray);
 
       function input(event) {
         event.preventDefault();
         let val = document.getElementById("push").value;
-        arr.push(parseInt(val));
+        arr = val.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
         if (arr.length > 0) {
           show();
         }
         document.getElementById("third").innerHTML = "";
-        document.getElementById("third").innerHTML = `<span>Added: ${val}</span>`;
+        document.getElementById("third").innerHTML = `<span>Added: ${arr.join(', ')}</span>`;
       }
 
       function show() {
         let vision = document.getElementById('first');
-        vision.innerHTML = ""; // Clear previous elements
+        vision.innerHTML = "";
         arr.forEach((ele, index) => {
           let span = document.createElement("span");
           span.innerHTML = `${ele}`;
@@ -281,6 +313,13 @@
             }, 500); 
           }, 500);
         });
+      }
+
+      function generateArray() {
+        const length = 10;
+        arr = Array.from({ length }, () => Math.floor(Math.random() * 100));
+        show();
+        document.getElementById("third").innerHTML = `<span>Array Generated: ${arr.join(', ')}</span>`;
       }
     </script>
   </body>
