@@ -7,11 +7,32 @@
     <link rel="stylesheet" href="./algo_style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <style>
+    body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text inside containers */
+}
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center main content horizontally */
+  width: 100%;
+  box-sizing: border-box;
+}
     #s1{
       background-color: none;
       padding-bottom: 25px;
       padding-top: 15px;
   }
+  nav {
+  width: 90%;
+  display: flex;
+  justify-content: center; /* Center nav items */
+  align-items: center;
+}
 
   #s1_input1,
   #s1_input2 {
@@ -47,6 +68,12 @@ padding: 10px;
     cursor: pointer;
   
   }
+
+  #s1, #s2, #s3 {
+  width: 90%; /* Ensure sections have some margin */
+  max-width: 1200px; /* Prevent sections from becoming too wide */
+  box-sizing: border-box;
+}
   
   /* *********** S2 ************ */
   
@@ -65,15 +92,14 @@ padding: 10px;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
   }
-    #list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    max-width: 100%;
-    box-sizing: border-box;
+  #list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the boxes */
+  padding: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
-
 .box {
     width: 60px;
     height: 60px;
@@ -121,14 +147,17 @@ padding: 10px;
   }
   
   #iframe_div {
-    margin-top: 40px;
-  }
-  iframe {
-    border-radius: 30px;
-    display: block;
-    margin: auto;
-  }
-  
+  margin-top: 40px;
+  display: flex;
+  justify-content: center; 
+}
+
+iframe {
+  border-radius: 30px;
+  width: 100%; 
+  max-width: 560px; 
+}
+
   .highlight {
     background-color: yellow; 
     color: black;
