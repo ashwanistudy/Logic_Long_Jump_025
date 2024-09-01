@@ -1,34 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Binary Search</title>
     <link rel="stylesheet" href="./algo_style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <style>
     #s1{
-      background-color: rgba(96, 64, 147, 0.706);
       padding-bottom: 25px;
       margin-top: 10px;
       border-top-left-radius: 13px;
       border-top-right-radius: 13px;
-     
+      padding-top: 15px;
   
   }
-  #s1_topic {
-      border-top-left-radius: 13px;
-      border-top-right-radius: 13px;
-    padding: 15px;
-    margin-top: 0px;
-    text-align: center;
-    font-size: xx-large;
-    background: rgb(238, 174, 202);
-    background: linear-gradient(
-      90deg,
-      rgba(238, 174, 202, 1) 0%,
-      rgba(148, 187, 233, 1) 100%
-    );}
+
   
   #s1_input1,
   #s1_input2 {
@@ -49,16 +37,12 @@
     border-color: red;
     box-shadow: #edaec9 0px 0px 0px 4px;
   }
-  .s1_submit,
+  .s1_submit, #random_array ,
   #reset {
-    background: rgb(238, 174, 202);
-    background: linear-gradient(
-      90deg,
-      rgba(238, 174, 202, 1) 0%,
-      rgba(148, 187, 233, 1) 100%
-    );
-    color: rgba(0, 0, 0, 0.712);
-    padding: 10px;
+    background-color: #802553;
+color: white;    
+font-weight: 700;
+padding: 10px;
     font-size: medium;
     border: none;
     width: 10%;
@@ -72,17 +56,14 @@
   /* *********** S2 ************ */
   
   #visualizer {
-    /* height: 63vh; */
-    background: rgb(238,174,202);
-    background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);  
+   background-color: white;
     padding: 80px;
   }
   #text {
     margin-top: 0px;
     padding-bottom: 80px;
-    background: rgb(238,174,202);
-    background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);  
-    color: white;
+    background-color: white;
+    color: black;
     font-size: 25px;
     text-transform: none;
     border-bottom-left-radius: 12px;
@@ -90,11 +71,13 @@
   
   }
   #list {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 0;
-  }
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 0;
+  flex-wrap: wrap; /* Add this line to enable wrapping */
+}
+
   .box {
     list-style: none;
     border-radius: 5px;
@@ -134,7 +117,7 @@
   }
   h3 {
     font-size: 21px;
-    line-height: 10px;
+    line-height: 35px;
     color: rgb(62, 134, 192);
     position: relative;
     left: 8%;
@@ -182,9 +165,17 @@
       <hr style="color: gray" />
       <!-- nav bar end -->
      
+      <section id="s2">
+        <!-- section2 -->
+        <div id="visualizer">
+          <ul id="list"></ul>
+        </div>
+        <div>
+          <h2 id="text"></h2>
+        </div>
+      </section>
+
       <section id="s1">
-        <!-- <h1 id="s1_topic">Binary Search</h1>
-        <a href="./Two_Pointer.html">2pointer</a> -->
         <form action="#" class="form">
           <input
             type="text"
@@ -202,20 +193,11 @@
           />
 
           <input type="submit" value="Find Target" class="s1_submit" />
-          <button id="reset">Reset</button>
+          <button type="button" id="random_array">Array</button>
+          <button type="button" id="reset">Reset</button>
         </form>
       </section>
       <!-- section1 -->
-
-      <section id="s2">
-        <!-- section2 -->
-        <div id="visualizer">
-          <ul id="list"></ul>
-        </div>
-        <div>
-          <h2 id="text"></h2>
-        </div>
-      </section>
       <section id="s3">
         <!-- section3 -->
         <div id="description">
@@ -253,7 +235,7 @@
             ></iframe>
           </div>
 
-          <!-- <h2>Steps of Binary Search Algorithm</h2>
+          <h2>Steps of Binary Search Algorithm</h2>
           <h3>
             Step 1:
             <p>Start with the middle element of the sorted array.</p>
@@ -429,7 +411,7 @@
             logarithm is 2, but in Big-O notation, the base is not specified
             because it only affects the constant factor, not the overall
             complexity.
-          </p> -->
+          </p>
         </div>
       </section>
     </div>
@@ -437,53 +419,51 @@
 </html>
 <script src="./algo_scripts.js"></script>
 
+
+
  <script>
-    let formsubmit = document
-      .querySelector(".form")
-      .addEventListener("submit", datafn);
-    let arrayboxex = document.querySelector("#list");
-    let visualizer = document.querySelector("#visualizer");
-    let ans = document.querySelector("#text");
+     let formsubmit = document.querySelector(".form").addEventListener("submit", datafn);
+      let arrayboxex = document.querySelector("#list");
+      let visualizer = document.querySelector("#visualizer");
+      let ans = document.querySelector("#text");
 
-    function datafn() {
-      event.preventDefault();
+      function datafn(event) {
+        event.preventDefault();
 
-      arrayboxex.innerHTML = "";
-      let arr = [];
-      let userArray = document.querySelector("#s1_input1").value;
-      let target = document.querySelector("#s1_input2").value;
-      target = Number(target);
-      arr.push(userArray);
-      arr = arr[0].split(",").map(Number);
-      arr.sort((a, b) => a - b);
-      n = arr.length;
-      boxexfn(arr, n);
-      binarysearch(arr, n, target);
-    }
+        arrayboxex.innerHTML = "";
+        let arr = [];
+        let userArray = document.querySelector("#s1_input1").value;
+        let target = document.querySelector("#s1_input2").value;
+        target = Number(target);
+        arr.push(userArray);
+        arr = arr[0].split(",").map(Number);
+        arr.sort((a, b) => a - b);
+        n = arr.length;
+        boxexfn(arr, n);
+        binarysearch(arr, n, target);
+      }
 
-    //====================Boxex===========================
-    let boxexfn = (arr, n) => {
-      arr.map((ele) => {
-        let box = document.createElement("li");
-        box.className = "box";
-        box.innerText = ele;
-        arrayboxex.append(box);
-      });
-      visualizer.append(arrayboxex);
-    };
+      //====================Boxex===========================
+      let boxexfn = (arr, n) => {
+        arr.map((ele) => {
+          let box = document.createElement("li");
+          box.className = "box";
+          box.innerText = ele;
+          arrayboxex.append(box);
+        });
+        visualizer.append(arrayboxex);
+      };
 
-    // ===============Two Pointerfn==================
-    let timeout = 1500;
+      // ===============Two Pointerfn==================
+      let timeout = 1500;
 
-    function binarysearch(arr, n, target) {
-      let low = 0;
-      let high = n - 1;
+      function binarysearch(arr, n, target) {
+        let low = 0;
+        let high = n - 1;
 
-      function updateVisualizer(mid, delay) {
-        setTimeout(() => {
-          arrayboxex
-            .querySelectorAll(".box")
-            .forEach((box) =>
+        function updateVisualizer(mid, delay) {
+          setTimeout(() => {
+            arrayboxex.querySelectorAll(".box").forEach((box) =>
               box.classList.remove(
                 "highlight-low",
                 "highlight-high",
@@ -491,54 +471,56 @@
               )
             );
 
-          if (low < arr.length)
-            arrayboxex
-              .querySelectorAll(".box")
-              [low]?.classList.add("highlight-low");
-          if (high < arr.length)
-            arrayboxex
-              .querySelectorAll(".box")
-              [high]?.classList.add("highlight-high");
-          if (mid < arr.length)
-            arrayboxex
-              .querySelectorAll(".box")
-              [mid]?.classList.add("highlight-mid");
+            if (low < arr.length)
+              arrayboxex.querySelectorAll(".box")[low]?.classList.add("highlight-low");
+            if (high < arr.length)
+              arrayboxex.querySelectorAll(".box")[high]?.classList.add("highlight-high");
+            if (mid < arr.length)
+              arrayboxex.querySelectorAll(".box")[mid]?.classList.add("highlight-mid");
 
-          ans.innerText = `Low: ${low}, High: ${high}, Mid: ${mid}, Mid Value: ${arr[mid]}`;
-        }, delay);
-      }
+            ans.innerText = `Low: ${low}, High: ${high}, Mid: ${mid}, Mid Value: ${arr[mid]}`;
+          }, delay);
+        }
 
-      function step() {
-        if (low > high) {
-          return setTimeout(() => {
-            ans.innerText = `Element Not Present in Array.`;
+        function step() {
+          if (low > high) {
+            return setTimeout(() => {
+              ans.innerText = `Element Not Present in Array.`;
+            }, timeout);
+          }
+
+          const mid = Math.floor((low + high) / 2);
+          updateVisualizer(mid, timeout);
+
+          setTimeout(() => {
+            if (arr[mid] === target) {
+              ans.innerText = `Element Found At Index : ${mid}`;
+            } else if (arr[mid] < target) {
+              low = mid + 1;
+            } else {
+              high = mid - 1;
+            }
+            step();
           }, timeout);
         }
 
-        const mid = Math.floor((low + high) / 2);
-        updateVisualizer(mid, timeout);
-
-        setTimeout(() => {
-          if (arr[mid] === target) {
-            ans.innerText = `Element Found At Index : ${mid}`;
-          } else if (arr[mid] < target) {
-            low = mid + 1;
-          } else {
-            high = mid - 1;
-          }
-          step();
-        }, timeout);
+        step();
       }
 
-      step();
-    }
+      // ===============Reset==================
+      let resetfn = () => {
+        arr = [];
+        window.location.reload();
+      };
+      reset.addEventListener("click", resetfn);
 
-    // ===============Reset==================
-    let resetfn = () => {
-      arr = [];
+      // ===============Random Array==================
+      let randomArrayFn = () => {
+        let randomArray = Array.from({ length: 10 }, () =>
+          Math.floor(Math.random() * 100)
+        );
+        document.querySelector("#s1_input1").value = randomArray.join(",");
+      };
 
-      window.location.reload();
-    };
-    reset.addEventListener("click", resetfn);
+      document.querySelector("#random_array").addEventListener("click", randomArrayFn);
   </script>
-
