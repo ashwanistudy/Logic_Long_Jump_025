@@ -6,7 +6,131 @@
     <title>Document</title>
     <link rel="stylesheet" href="./algo_style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: content-box;
+      }
   
+      .container {
+        padding: 10px;
+      }
+  
+      .array-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        overflow: auto;
+        margin: auto;
+      }
+  
+      .array-element {
+        padding: 10px 20px;
+        margin: 5px;
+        background-color: #FF8364;
+        color: black;
+        border-radius: 5px;
+        font-weight: bold;
+        opacity: 1;
+      }
+  
+      .visualization {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        overflow: auto;
+        margin: auto;
+      }
+  
+      .window-element {
+        background-color: #007bff;
+        color: white;
+      }
+  
+      .card-header {
+        color: white;
+        background-color: blue;
+        padding: 20px;
+        font-weight: 500;
+        font-size: 40px;
+        text-shadow: 1px 1px 2px #000, -1px -1px 2px #555;
+  
+  
+      }
+  
+      .card-footer {
+        display:flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-wrap:wrap;
+        padding:20px;
+      }
+  
+      .inputs {
+        display: flex;
+        align-items: cetner;
+        flex-wrap:wrap;
+        gap: 20px;
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+      .inputs input{
+        color:black;
+        padding:10px;
+        width:200px;
+        border-radius:20px;
+        border:none;
+      }
+      #inputArray{
+        width:250px;
+      }
+  
+      .buttons{
+        display: flex;
+        align-items: cetner;
+        flex-wrap:wrap;
+        gap: 20px;
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin:10px;
+      }
+  
+      .buttons button{
+        color:black;
+        padding:10px;
+        width:100px;
+        border-radius:20px;
+        border:none;
+      }
+  
+      #random_array_generate{
+        background-color:green;
+      }
+  
+      #startButton{
+        background-color:#28A745
+      }
+      #nextButton{
+        background-color:#007BFF
+      }
+  
+  
+      /* overview part */
+      #output{
+        padding:10px;
+      }
+      .space{
+       margin-bottom:10px;
+       font-size:20px;
+      }
+      .heading{
+        display:block;
+        text-align:center;
+        text-transform: uppercase;
+        margin-bottom:20px;
+      }
+    </style>
   </head>
   <body>
     <div id="main">
@@ -18,8 +142,180 @@
       </nav>
       <hr style="color: gray" />
       <!-- nav bar end -->
+
+      <!-- appu kumar's code -->
+      <div class="container">
+        <div id="playground_section">
+          <div id="playground_card">
+    
+            <!-- Title of DSA and Algorith & small Desp -->
+            <!-- <div class="card-header">
+              <div>
+                <h5 id="algo_title">Visualizer</h5>
+              </div>
+            </div> -->
+    
+    
+            <!-- code added by appu kumar, visualization of the sliding window -->
+            <div class="card-body" id="visualizer_play_ground" style="height:200px; background-color:white">
+              <div class="" style="width: 100%;height: 350px;">
+                <span class="text-center" style="display: block;" id="span_in_binary_search"></span>
+                <div class="array-container" id="visualization" style="height: 200px;"></div>
+              </div>
+            </div>
+    
+            <div class="card-footer">
+                <div class="inputs">
+                  <input type="text" id="inputArray"
+                    placeholder="Enter array elements(comma separated)">
+                  <input type="number" id="windowSize" placeholder="Enter window size">
+                </div>
+                <div>
+                  <div class="buttons">
+                    <button id="random_array_generate">Random Arr</button>
+                    <button id="startButton">Start</button>
+                    <button id="nextButton" disabled>Next Step</button>
+                  </div>
+                </div>
+              
+            </div>
+    
+    
+          </div>
+          <!-- About DSA & Algorithm -->
+          <div id="info_section">
+            <div class="card-body" id="output"></div>
+          </div>
+          <!-- About DSA & Algorithm -->
+        </div>
+    
+      </div>
+
     </div>
   </body>
 </html>
 
 <script src="./algo_scripts.js"></script>
+<script>
+
+  // algo of slinding window
+  const inputArray = document.getElementById("inputArray");
+  const windowSize = document.getElementById("windowSize");
+  const startButton = document.getElementById("startButton");
+  const nextButton = document.getElementById("nextButton");
+  const visualization = document.getElementById("visualization");
+
+  let array = [];
+  let windowLength = 0;
+  let currentIndex = 0;
+
+  let random_array_generate = document.getElementById("random_array_generate")
+  random_array_generate.addEventListener("click", () => {
+    let randomArray = generateRandomArray(13, 100);
+    document.getElementById('inputArray').value = randomArray.join(',');
+  })
+
+  function generateRandomArray(size, max) {
+    let arr = [];
+    while (arr.length < size) {
+      let num = Math.floor(Math.random() * max) + 1;
+      if (!arr.includes(num) && num > 5) {
+        arr.push(num);
+      }
+    }
+    return arr;
+  }
+
+
+  startButton.addEventListener("click", () => {
+    array = inputArray.value.split(",").map(Number);
+    windowLength = parseInt(windowSize.value);
+    currentIndex = 0;
+    nextButton.disabled = false;
+    renderArray();
+    highlightWindow();
+  });
+
+  nextButton.addEventListener("click", () => {
+    if (currentIndex + windowLength < array.length) {
+      currentIndex++;
+      renderArray();
+      highlightWindow();
+    }
+    if (currentIndex + windowLength >= array.length) {
+      nextButton.disabled = true;
+    }
+  });
+
+  function renderArray() {
+    visualization.innerHTML = "";
+    array.forEach((element, index) => {
+      const div = document.createElement("div");
+      div.className = "array-element";
+      div.textContent = element;
+      div.dataset.index = index;
+      visualization.appendChild(div);
+    });
+  }
+
+  function highlightWindow() {
+    const elements = document.querySelectorAll(".array-element");
+    elements.forEach(element => {
+      element.classList.remove("window-element");
+    });
+    for (let i = currentIndex; i < currentIndex + windowLength && i < array.length; i++) {
+      elements[i].classList.add("window-element");
+    }
+  }
+
+
+  const algorithms_Data = [
+    {
+      "id": "1265",
+      "label": "Sliding Window",
+      "text": "Sliding Window Visualiser",
+      "redirect_page": "sliding_window.html",
+      "image": "banner_5.png",
+      "content_id": 1265
+    }
+  ];
+
+  // alog content
+  const data = [
+    {
+      "content_id": 1265,
+      "title": "Sliding Window Visualizer",
+      "overview": "The Sliding Window technique is a powerful and versatile method used in computer science for solving problems that involve arrays or lists. It helps optimize the process of calculating sums, averages, or other metrics over a subset of elements by maintaining a window that slides over the data. This technique is essential in scenarios where the data set is large, and a brute-force approach would be inefficient. <img style='width:100%' class='img-fluid mt-2'>",
+      "What is Sliding Window Technique?": "The Sliding Window technique is an algorithmic method used for calculating values over a subset of elements in an array or list. It involves maintaining a window that slides over the data, updating the required values as it moves from one position to the next.",
+      "Basic Operations of Sliding Window Technique?": "<b>Initialize Window:</b> Set the initial position and size of the window.<br> <b>Slide Window:</b> Move the window one position to the right (or left, depending on the problem).<br> <b>Update Values:</b> Add the new element entering the window and remove the element exiting the window to update the required values efficiently.",
+      "Properties of Sliding Window": "<b>Efficiency:</b> Reduces the time complexity of problems that would otherwise require nested loops.<br> <b>Flexibility:</b> Can be adjusted to handle different window sizes and movements.<br> <b>Locality:</b> Operates on contiguous subsets of the data, maintaining a local view of the window elements.",
+      "Applications of Sliding Window": "<b>Maximum/Minimum Values:</b> Finding the maximum or minimum values in subarrays of fixed size.<br> <b>Substring Problems:</b> Solving problems related to finding unique substrings or anagrams in strings.<br> <b>Average Calculations:</b> Computing the average of elements within a sliding window.<br> <b>Pattern Matching:</b> Used in algorithms like the Rabin-Karp algorithm for string matching.<br> <b>Data Stream Processing:</b> Managing real-time data streams for monitoring and analysis.",
+      "Advantages of Using Sliding Window": "<b>Reduced Complexity:</b> Minimizes the time complexity by avoiding redundant calculations.<br> <b>Scalability:</b> Efficiently handles large data sets by maintaining a fixed-size window.<br> <b>Versatility:</b> Applicable to a wide range of problems involving contiguous data subsets.",
+      "Disadvantages of Using Sliding Window": "<b>Fixed Window Size:</b> May require adjustments or additional logic to handle variable window sizes.<br> <b>Boundary Handling:</b> Requires careful management of window boundaries, especially at the edges of the data set.",
+      "Sliding Window Variations": "<b>Fixed-size Sliding Window:</b> The window size remains constant as it slides over the data.<br> <b>Variable-size Sliding Window:</b> The window size can expand or shrink based on the problem's requirements.<br> <b>Two-pointer Technique:</b> A variant that uses two pointers to represent the window's boundaries dynamically.",
+      "Real-World Examples of Sliding Window": "<b>Network Traffic Monitoring:</b> Analyzing packet flows over a fixed time window.<br> <b>Stock Price Analysis:</b> Calculating moving averages of stock prices.<br> <b>Sensor Data Processing:</b> Managing and analyzing data from sensors in real-time.<br> <b>Audio/Video Processing:</b> Smoothing signals or frames over time.<br> <b>Algorithm Optimization:</b> Enhancing algorithms like substring search, maximum subarray, and others."
+    },
+
+  ];
+
+  curr_DSA = algorithms_Data.filter(d => d.id === "1265");
+
+  function printData(contentId) {
+    const outputDiv = document.getElementById('output');
+    let html = '';
+    const dsa = data.find(item => item.content_id === contentId);
+    document.getElementById("output").innerText = dsa.title
+    if (!dsa) {
+      outputDiv.innerHTML = 'Data structure not found.';
+      return;
+    }
+    for (const [key, value] of Object.entries(dsa)) {
+      if (key != 'content_id' && key != 'title') {
+        html += `<div class="space"><p><strong class="heading">${key} <br></strong> ${value}</p></div>`;
+      }
+    }
+    outputDiv.innerHTML = html;
+  }
+  printData(curr_DSA[0].content_id);
+
+</script>

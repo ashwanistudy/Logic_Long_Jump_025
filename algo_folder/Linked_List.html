@@ -6,7 +6,105 @@
     <title>Document</title>
     <link rel="stylesheet" href="./algo_style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: content-box;
+        }
+
+        .container {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .card-header {
+            color: white;
+            background-color: blue;
+            padding: 20px;
+            font-weight: 500;
+            font-size: 40px;
+            text-shadow: 1px 1px 2px #000, -1px -1px 2px #555;
+
+
+        }
+        .ll_outer_head {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin:10px 40px;
+
+        }
+
+        .ll_outer_head .inputs{
+            margin-right:20px;
+        
+        }
+        .ll_outer_head  input{
+            padding:10px;
+            margin:10px;
+            font-weight:700;
+            font-size:12px;
+            color:black;
+            border-radius:20px;
+            border:none;
+            width:200px;
+        }
+
+        .ll_outer_head  button{
+            padding:10px;
+            margin:10px;
+            font-weight:700;
+            font-size:12px;
+            cursor:pointer;
+            border-radius:20px;
+            border:none;
+            width:70px;
+            color:white;
+        }
+
+        .ll_outer_head #insert{
+            background-color:green
+        }
+        .ll_outer_head #delete{
+            background-color:red;
+        }
+
+        #visualization {
+             height:40vh;
+             background-color:white;
+             width:100%;
+        }
+
+        .ll_notes {
+            
+            font-size: 1em;
+            font-weight:500;
+            padding:20px 20px;;
+            border:2px solid black
+        }
+        .ll_notes li{
+            list-style:none;
+            list-style-type:circle;
+
+        }
+
+        #info_section{
+            /* border:10px solid red; */
+            padding:20px 20px;
+        }
+
+        #space{
+            margin-bottom:10px;
+        }
+
+        #output li{
+            list-style:none;
+            list-style-type:disc;
+            margin-left:14px;
+        }
+    </style>
   </head>
   <body>
     <div id="main">
@@ -18,8 +116,325 @@
       </nav>
       <hr style="color: gray" />
       <!-- nav bar end -->
+
+      <!--appu kumar's code-->
+      <div class="container">
+        <div>
+            <div>
+                <!-- Title of DSA and Algorith & small Desp -->
+                <!-- <div class="card-header">
+                    <div>
+                        <h5 id="algo_title">Visualizer</h5>
+                    </div>
+                </div> -->
+                <!-- Title of DSA and Algorith & small Desp -->
+                <div class="card-body" id="visualizer_play_ground">
+                    <div class="ll_outer_container">
+                       
+                        <div id="visualization">
+
+                        </div>
+
+                        <div class="ll_outer_head">
+                            <div class="inputs">
+                                <input type="text" id="value" placeholder="Value">
+                                <input type="number" id="index" placeholder="Index">
+                            </div>
+                            <div class="operations">
+                                <button onclick="insert()" id="insert">Insert</button>
+                                <button onclick="deleteNode()" id="delete">Delete</button>
+                            </div>
+                        </div>
+                        <div class="ll_notes">
+                            <ul>
+                                <li>Enter value to add Node to the end of the Linked List</li>
+                                <li>Enter value and index to add a node at a specific index </li>
+                                <li>Click delete to delete the last node</li>
+                                <li>Enter index to delete a node at specific index</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- About DSA & Algorithm -->
+            <div id="info_section">
+                <div class="card-body" id="output">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
     </div>
   </body>
 </html>
 
 <script src="./algo_scripts.js"></script>
+<script>
+    const algorithms_Data = [
+      {
+            "id": "5078",
+            "label": "Linked List",
+            "text": "Linked List Visualiser",
+            "redirect_page": "linked_list.html",
+            "image": "banner_8.png",
+            "content_id": 5078
+        },
+    ];
+
+
+    //////////////////////// algo_content
+    const data = [ 
+        {
+            "content_id": 5078,
+            "title": "Linked List Visualiser",
+            "overview": "Visualising Linked List Data Structure",
+            "operations": "<b>Insert:</b> Add an element to the list.</br> <b>Delete:</b>  Remove an element from the list.",
+            "usage": "<ul> <li>Enter value to add Node to the end of the Linked List</li><li>Enter value and index to add a node at a specific index</li><li>Click delete to delete the last node</li><li>Enter index to delete a node at a specific index</li></ul>",
+            "time complexity": "<b>Insert/ Delete Beginning</b>: O(1)</br><b>Insert/Delete End:</b> O(n)",
+            "Space complexity": " O(n)"
+
+        },
+       
+    ];
+
+    curr_DSA = algorithms_Data.filter(d => d.id === "5078");
+    function printData(contentId) {
+        const outputDiv = document.getElementById('output');
+        let html = '';
+        const dsa = data.find(item => item.content_id === contentId);
+        document.getElementById("output").innerText = dsa.title
+        if (!dsa) {
+            outputDiv.innerHTML = 'Data structure not found.';
+            return;
+        }
+        for (const [key, value] of Object.entries(dsa)) {
+            if (key != 'content_id' && key != 'title') {
+                html += `<div id="space"><p><strong>${key} <br></strong> ${value}</p></div>`;
+            }
+        }
+        outputDiv.innerHTML = html;
+    }
+    printData(curr_DSA[0].content_id);
+
+
+
+    //  ll algo
+
+    const container_lll = d3.select("#visualization");
+    const svg = container_lll.append("svg")
+        .attr("height", "100%")
+        .style("background-color", "white")
+        .style("color","black");
+
+    class Node {
+        constructor(data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+
+    class LinkedList {
+        constructor() {
+            this.head = null;
+        }
+
+        // insert a node
+        insert(value, index = null) {
+            const newNode = new Node(value);
+            if (index === null || index < 0) {
+
+                if (!this.head) {
+                    this.head = newNode;
+                } else {
+                    let current = this.head;
+                    while (current.next !== null) {
+                        current = current.next;
+                    }
+                    current.next = newNode;
+                }
+            } else {
+
+                if (index === 0) {
+                    newNode.next = this.head;
+                    this.head = newNode;
+                } else {
+                    let current = this.head;
+                    let prev = null;
+                    let currentIndex = 0;
+                    while (current !== null && currentIndex < index) {
+                        prev = current;
+                        current = current.next;
+                        currentIndex++;
+                    }
+                    if (prev !== null) {
+                        prev.next = newNode;
+                        newNode.next = current;
+                    }
+                }
+            }
+            this.visualize();
+        }
+
+
+        delete() {
+            if (!this.head) {
+                console.log("List is empty. Nothing to delete.");
+                return;
+            }
+            this.head = this.head.next;
+            this.visualize();
+        }
+
+        // delte at index
+        deleteAtIndex(index) {
+            if (!this.head) {
+                console.log("List is empty. Nothing to delete.");
+                return;
+            }
+            if (index === 0) {
+                this.head = this.head.next;
+            } else {
+                let current = this.head;
+                let prev = null;
+                let currentIndex = 0;
+                while (current !== null && currentIndex < index) {
+                    prev = current;
+                    current = current.next;
+                    currentIndex++;
+                }
+                if (current !== null && prev !== null) {
+                    prev.next = current.next;
+                }
+            }
+            this.visualize();
+        }
+
+
+        visualize() {
+            svg.selectAll("*:not(defs)").remove(); // Clear all existing elements except defs
+
+            const nodeRadius = 30;
+            const nodeMargin = 50;
+            let container_lllWidth = container_lll.node().clientWidth;
+            let xPos = 50;
+            let yPos = 200;
+
+
+            let current = this.head;
+            let totalWidth = 50;
+            while (current !== null) {
+                totalWidth += nodeRadius * 2 + nodeMargin;
+                current = current.next;
+            }
+            totalWidth += nodeRadius * 2 + nodeMargin; // Space for the null pointer
+
+
+            svg.attr("width", Math.max(container_lllWidth, totalWidth));
+
+
+            svg.append("text")
+                .attr("x", 30)
+                .attr("y", 160)
+                .attr("dy", 5)
+                .attr("text-anchor", "middle")
+                .text("head");
+
+            svg.append("line")
+                .attr("x1", 30)
+                .attr("y1", 165)
+                .attr("x2", 50)
+                .attr("y2", 200)
+                .attr("stroke", "black")
+                .attr("marker-end", "url(#arrow)");
+
+            current = this.head;
+            xPos = 50;
+
+            while (current !== null) {
+                const nodeGroup = svg.append("g")
+                    .attr("class", "node")
+                    .attr("transform", `translate(${xPos}, ${yPos})`);
+
+                nodeGroup.append("circle")
+                    .attr("r", nodeRadius)
+                    .attr("stroke", "black")
+                    .attr("fill", "white")
+                    .attr("stroke-width", 2);
+
+                nodeGroup.append("text")
+                    .attr("dy", 5)
+                    .attr("text-anchor", "middle")
+                    .text(current.data);
+
+                if (current.next !== null) {
+                    svg.append("line")
+                        .attr("class", "link")
+                        .attr("x1", xPos + nodeRadius)
+                        .attr("y1", yPos)
+                        .attr("x2", xPos + nodeRadius + nodeMargin)
+                        .attr("y2", yPos)
+                        .attr("stroke", "black")
+                        .attr("marker-end", "url(#arrow)");
+                }
+
+                current = current.next;
+                xPos += nodeRadius * 2 + nodeMargin;
+            }
+
+
+            const nullNode = svg.append("g")
+                .attr("class", "node")
+                .attr("transform", `translate(${xPos}, ${yPos})`);
+
+            nullNode.append("text")
+                .attr("dy", 5)
+                .attr("text-anchor", "middle")
+                .text("null");
+
+
+            if (this.head) {
+                svg.append("line")
+                    .attr("class", "link")
+                    .attr("x1", xPos - nodeRadius - nodeMargin)
+                    .attr("y1", yPos)
+                    .attr("x2", xPos - nodeRadius - nodeMargin + nodeRadius * 2)
+                    .attr("y2", yPos)
+                    .attr("stroke", "black")
+                    .attr("marker-end", "url(#arrow)");
+            }
+        }
+    }
+
+
+    const linkedList = new LinkedList();
+
+
+    function insert() {
+        const value = document.getElementById("value").value;
+        const index = parseInt(document.getElementById("index").value);
+        if (value !== "") {
+            linkedList.insert(value, isNaN(index) ? null : index);
+            document.getElementById("value").value = "";
+            document.getElementById("index").value = "";
+        }
+    }
+
+
+    function deleteNode() {
+        const index = parseInt(document.getElementById("index").value);
+        if (isNaN(index)) {
+            linkedList.delete();
+        } else {
+            linkedList.deleteAtIndex(index);
+        }
+        document.getElementById("index").value = "";
+    }
+
+
+    linkedList.visualize();
+
+
+</script>
