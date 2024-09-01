@@ -3,23 +3,406 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./algo_style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  
+    <title>Quick Sort Visualization</title>
+    <link rel="stylesheet" href="./algo_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <style>
+      #first {
+        width: 95%;
+        height: 20rem;
+        background-color: white;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      #first > span {
+        padding: 0.5rem 1rem;
+        background-color: navajowhite;
+        font-size: 1.5rem;
+        margin: 0.5rem;
+        position: absolute;
+        text-align: center;
+        line-height: 2rem;
+        transition: transform 0.5s ease, background-color 0.5s ease;
+        z-index: 1;
+      }
+      .current-min {
+        background-color: #FF004D;
+        z-index: 2;
+      }
+      .lifted {
+        animation: lift 0.5s ease forwards;
+      }
+      .swapping {
+        animation: swap 0.5s ease forwards;
+      }
+      @keyframes lift {
+        0% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-100px) scale(1.2);
+        }
+        100% {
+          transform: translateY(-100px) scale(1.2);
+        }
+      }
+      @keyframes swap {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      #second {
+        width: 95%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+      input {
+        width: 5rem;
+        height: 2rem;
+        padding: 1.5rem;
+        font-size: 2rem;
+        border: none;
+        border-radius: 0.5rem;
+      }
+      button {
+        padding: 1rem 2rem;
+        margin-left: 1rem;
+        font-size: 2rem;
+        font-weight: 600;
+        background-color: rgba(0, 128, 0, 0.747);
+        cursor: pointer;
+        border-radius: 0.5rem;
+        border: none;
+      }
+      button:hover {
+        background-color: rgb(6, 206, 6);
+      }
+      #third {
+        background-color: white;
+        width: 95%;
+        height: 5rem;
+        margin: auto;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #third > span {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      /* CSS for arrow positioning */
+      .arrow-container {
+        position: absolute;
+        width: 0;
+        height: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .arrow-top {
+        top: -2rem;
+      }
+
+      .arrow-bottom {
+        bottom: -2rem;
+      }
+
+      .arrow {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+
+      .arrow-label {
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-top: -10px;
+      }
+
+      .arrow-top .arrow {
+        border-bottom: 20px solid black;
+        margin-bottom: 5px;
+      }
+
+      .arrow-bottom .arrow {
+        border-top: 20px solid black;
+        margin-top: 5px;
+      }
+
+      #fourth {
+        width: 95%;
+        margin: auto;
+        padding: 2rem;
+        background-color: #faef5d;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #1d2b53;
+        text-align: center;
+        position: relative;
+        bottom: 0;
+      }
+      #fourth .info {
+        max-width: 800px;
+        margin: auto;
+      }
+      #fourth h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      #fourth h3 {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+      }
+      #fourth p {
+        font-size: 1.2rem;
+        line-height: 1.5;
+      }
+
+    </style>
   </head>
   <body>
     <div id="main">
       <!-- nav bar start -->
       <nav>
         <img src="./Main_Logo.jpeg" alt="" />
-        <p>Quick Sort</p>
+        <p>Quick Sort Visualization</p>
         <p id="hamburger">=</p>
       </nav>
       <hr style="color: gray" />
       <!-- nav bar end -->
+
+      <!-- First Section start -->
+      <section id="first"></section>
+      <!-- First Section end -->
+
+      <section id="third"></section>
+
+      <!-- Second Section start -->
+      <section id="second">
+        <form id="form">
+          <input type="number" required id="push" placeholder="0" />
+          <button type="submit">Add</button>
+        </form>
+        <button id="sort">Sort</button>
+      </section>
+      <!-- Second Section end -->
+       <!-- Fourth Section start -->
+<section id="fourth">
+  <div class="info">
+    <h2>Quick Sort Algorithm</h2>
+    <p>
+      Quick Sort is an efficient, comparison-based sorting algorithm that uses the divide-and-conquer principle.
+      It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays
+      according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.
+    </p>
+    <h3>Algorithm</h3>
+    <p>
+      1. Choose a pivot element from the array.<br>
+      2. Partition the array into two sub-arrays: one with elements less than the pivot and one with elements greater than the pivot.<br>
+      3. Recursively apply the above steps to the sub-arrays.<br>
+      4. Combine the sub-arrays to get the sorted array.
+    </p>
+    <h3>Time Complexity</h3>
+    <p>
+      Best Case: O(n log n)<br>
+      Average Case: O(n log n)<br>
+      Worst Case: O(n²)
+    </p>
+
+  </div>
+</section>
+<!-- Fourth Section end -->
     </div>
   </body>
-</html>
 
-<script src="./algo_scripts.js"></script>
+  <script src="./algo_scripts.js"></script>
+
+  <script>
+    let arr = [];
+
+    document.getElementById("form").addEventListener("submit", input);
+    document.getElementById("sort").addEventListener("click", () => quickSort(0, arr.length - 1));
+
+    function input(event) {
+      event.preventDefault();
+      let val = document.getElementById("push").value;
+      arr.push(parseInt(val));
+      if (arr.length > 0) {
+        show();
+      }
+      document.getElementById("third").innerHTML = `<span>Added: ${val}</span>`;
+    }
+
+    function show() {
+      let container = document.getElementById("first");
+      container.innerHTML = "";
+
+      let totalWidth = arr.length * 80;
+      let containerWidth = container.clientWidth;
+      let startLeft = (containerWidth - totalWidth) / 2;
+
+      arr.forEach((ele, index) => {
+        let span = document.createElement("span");
+        span.innerHTML = `${ele}`;
+        span.style.left = `${startLeft + index * 80}px`;
+        span.setAttribute("data-index", index);
+        container.appendChild(span);
+      });
+    }
+
+    async function quickSort(low, high) {
+      if (low < high) {
+        let pi = await partition(low, high);
+        await quickSort(low, pi - 1);
+        await quickSort(pi + 1, high);
+      } else {
+        document.getElementById("third").innerHTML = `<span>Sorting Completed</span>`;
+      }
+    }
+
+    async function partition(low, high) {
+      let pivot = arr[high];
+      let i = low - 1;
+
+      resetLabels();
+      highlightPivot(high);
+      highlightLow(low);
+      highlightHigh(high);
+
+      for (let j = low; j < high; j++) {
+        highlightComparison(j);
+
+        if (arr[j] <= pivot) {
+          i++;
+          await animateSwap(i, j);
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+          show();
+        }
+        await delay(500); 
+        removeComparisonHighlight(j);
+      }
+
+      await animateSwap(i + 1, high);
+      [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+      show();
+
+      return i + 1;
+    }
+
+    function animateSwap(i, j) {
+      return new Promise((resolve) => {
+        let elements = document.querySelectorAll("#first > span");
+        let elemI = elements[i];
+        let elemJ = elements[j];
+
+        elemI.classList.add("lifted");
+        elemJ.classList.add("lifted");
+
+        let posI = elemI.style.left;
+        let posJ = elemJ.style.left;
+        elemI.style.left = posJ;
+        elemJ.style.left = posI;
+
+        setTimeout(() => {
+          elemI.classList.remove("lifted");
+          elemJ.classList.remove("lifted");
+          elemI.classList.add("swap");
+          elemJ.classList.add("swap");
+
+          let tempHTML = elemI.innerHTML;
+          elemI.innerHTML = elemJ.innerHTML;
+          elemJ.innerHTML = tempHTML;
+
+          setTimeout(() => {
+            elemI.classList.remove("swap");
+            elemJ.classList.remove("swap");
+            resolve();
+          }, 500);
+        }, 500);
+      });
+    }
+
+    function resetLabels() {
+      let elements = document.querySelectorAll("#first > span");
+      elements.forEach((elem) => {
+        elem.classList.remove("pivot", "low", "high");
+        elem.innerHTML = elem.innerHTML.split("<br>")[0];
+
+        let arrowContainers = elem.querySelectorAll(".arrow-container");
+        arrowContainers.forEach((container) => container.remove());
+      });
+    }
+
+    function highlightPivot(index) {
+      let elements = document.querySelectorAll("#first > span");
+      addArrow(elements[index], "Pivot", "top");
+      elements[index].classList.add("pivot");
+    }
+
+    function highlightLow(index) {
+      let elements = document.querySelectorAll("#first > span");
+      addArrow(elements[index], "Low", "top");
+      elements[index].classList.add("low");
+    }
+
+    function highlightHigh(index) {
+      let elements = document.querySelectorAll("#first > span");
+      addArrow(elements[index], "High", "bottom");
+      elements[index].classList.add("high");
+    }
+
+    function highlightComparison(index) {
+      let elements = document.querySelectorAll("#first > span");
+      elements[index].classList.add("current-min");
+    }
+
+    function removeComparisonHighlight(index) {
+      let elements = document.querySelectorAll("#first > span");
+      elements[index].classList.remove("current-min");
+    }
+
+    function addArrow(element, label, position) {
+      let arrowContainer = document.createElement("div");
+      arrowContainer.classList.add("arrow-container", `arrow-${position}`);
+
+      let arrow = document.createElement("div");
+      arrow.classList.add("arrow");
+
+      let arrowLabel = document.createElement("div");
+      arrowLabel.classList.add("arrow-label");
+      arrowLabel.innerText = label;
+
+      arrowContainer.appendChild(arrow);
+      arrowContainer.appendChild(arrowLabel);
+
+      element.appendChild(arrowContainer);
+    }
+
+    function delay(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+  </script>
+</html>
