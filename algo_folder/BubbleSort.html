@@ -14,7 +14,7 @@
       #first {
         width: 95%;
         height: 20rem;
-        background-color: white;
+        background-color: rgba(96, 64, 147, 0.706);
         margin: auto;
         display: flex;
         align-items: center;
@@ -30,9 +30,15 @@
         margin: 0.5rem;
         text-align: center;
         line-height: 2rem;
-        transition: transform 0.5s ease, background-color 0.5s ease;
+        transition: transform 0.5s ease, background-color 0.5s ease,
+          background-color 0.3s ease;
         z-index: 1;
         position: relative;
+      }
+
+      #first > span:hover {
+        background-color: #ff004d; 
+        transform: scale(1.1); 
       }
       .current-min {
         background-color: #ff004d;
@@ -68,37 +74,50 @@
       }
       #second {
         width: 95%;
-        margin: auto;
+        margin: 2rem auto;
         display: flex;
+        align-items: center;
         justify-content: center;
-        margin-top: 1rem;
+        gap: 1rem;
+      }
+      #second form {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
       }
       input {
-        width: 5rem;
+        width: 20rem;
         height: 2rem;
-        padding: 1.5rem;
-        font-size: 2rem;
-        border: none;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        border: 2px solid #1d2b53;
         border-radius: 0.5rem;
+        background-color: rgba(96, 64, 147, 0.706);
       }
       button {
-        padding: 1rem 2rem;
-        margin-left: 1rem;
-        font-size: 2rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
         font-weight: 600;
         background-color: rgba(0, 128, 0, 0.747);
         cursor: pointer;
         border-radius: 0.5rem;
-        border: none;
+        border: 2px solid #1d2b53;
+        color: white;
+        transition: background-color 0.3s ease;
       }
       button:hover {
         background-color: rgb(6, 206, 6);
       }
+
       #third {
-        background-color: white;
+        background: linear-gradient(
+          90deg,
+          rgba(238, 174, 202, 1) 0%,
+          rgba(148, 187, 233, 1) 100%
+        );
         width: 95%;
         height: 5rem;
-        margin: auto;
+        margin: 2rem auto; /* Center horizontally and add vertical margin */
         border-bottom-left-radius: 0.5rem;
         border-bottom-right-radius: 0.5rem;
         display: flex;
@@ -109,11 +128,45 @@
         font-size: 1.5rem;
         font-weight: 600;
       }
+      .arrow-container {
+        position: absolute;
+        width: 0;
+        height: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .arrow-top {
+        top: -2rem;
+      }
+      .arrow-bottom {
+        bottom: -2rem;
+      }
+      .arrow {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+      .arrow-label {
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-top: -10px;
+      }
+      .arrow-top .arrow {
+        border-bottom: 20px solid black;
+        margin-bottom: 5px;
+      }
+      .arrow-bottom .arrow {
+        border-top: 20px solid black;
+        margin-top: 5px;
+      }
       #fourth {
         width: 95%;
-        margin: auto;
+        margin: 2rem auto; /* Center horizontally and add vertical margin */
         padding: 2rem;
-        background-color: #faef5d;
+        background-color: antiquewhite;
         border-radius: 0.5rem;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         color: #1d2b53;
@@ -160,33 +213,43 @@
       <!-- Second Section start -->
       <section id="second">
         <form id="form">
-          <input type="number" required id="push" placeholder="0" />
+          <input
+            type="text"
+            required
+            id="push"
+            placeholder="Enter numbers separated by commas"
+          />
           <button type="submit">Add</button>
         </form>
         <button id="sort-asc">Sort Ascending</button>
         <button id="sort-desc">Sort Descending</button>
+        <button id="auto-gen">Auto Generate Array</button>
       </section>
       <!-- Second Section end -->
-      
+
       <!-- Fourth Section start -->
       <section id="fourth">
         <div class="info">
           <h2>Bubble Sort Algorithm</h2>
           <p>
-            Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. This process is repeated until the list is sorted.
+            Bubble Sort is a simple sorting algorithm that repeatedly steps
+            through the list, compares adjacent elements, and swaps them if they
+            are in the wrong order. This process is repeated until the list is
+            sorted.
           </p>
           <h3>Algorithm</h3>
           <p>
-            1. Compare the first two adjacent elements.<br>
-            2. If the first element is greater than the second, swap them.<br>
-            3. Move to the next pair of adjacent elements and repeat the process.<br>
-            4. Continue until the end of the list is reached.<br>
+            1. Compare the first two adjacent elements.<br />
+            2. If the first element is greater than the second, swap them.<br />
+            3. Move to the next pair of adjacent elements and repeat the
+            process.<br />
+            4. Continue until the end of the list is reached.<br />
             5. Repeat the process for the entire list until no swaps are needed.
           </p>
           <h3>Time Complexity</h3>
           <p>
-            Best Case: O(n)<br>
-            Average Case: O(n²)<br>
+            Best Case: O(n)<br />
+            Average Case: O(n²)<br />
             Worst Case: O(n²)
           </p>
         </div>
@@ -199,18 +262,33 @@
       let arr = [];
 
       document.getElementById("form").addEventListener("submit", input);
-      document.getElementById("sort-asc").addEventListener("click", () => bubbleSort(arr, true));
-      document.getElementById("sort-desc").addEventListener("click", () => bubbleSort(arr, false));
+      document
+        .getElementById("sort-asc")
+        .addEventListener("click", () => bubbleSort(arr, true));
+      document
+        .getElementById("sort-desc")
+        .addEventListener("click", () => bubbleSort(arr, false));
+      document
+        .getElementById("auto-gen")
+        .addEventListener("click", autoGenerateArray);
 
       function input(event) {
         event.preventDefault();
         let val = document.getElementById("push").value;
-        arr.push(parseInt(val));
-        if (arr.length > 0) {
-          show();
-        }
+        arr = val.split(",").map(Number);
+        show();
         document.getElementById("third").innerHTML = "";
-        document.getElementById("third").innerHTML = `<span>Added: ${val}</span>`;
+        document.getElementById("third").innerHTML = `<span>Added: ${arr.join(
+          ", "
+        )}</span>`;
+      }
+
+      function autoGenerateArray() {
+        arr = Array.from({ length: 10 }, () => Math.floor(Math.random() * 100));
+        show();
+        document.getElementById(
+          "third"
+        ).innerHTML = `<span>Auto Generated: ${arr.join(", ")}</span>`;
       }
 
       function show() {
@@ -233,7 +311,9 @@
             }
           }
         }
-        document.getElementById("third").innerHTML = `<span>Sorting Completed</span>`;
+        document.getElementById(
+          "third"
+        ).innerHTML = `<span>Sorting Completed</span>`;
       }
 
       async function swapAndAnimate(arr, index1, index2) {

@@ -14,19 +14,31 @@
       #first {
         width: 95%;
         height: 20rem;
-        background-color: white;
+        background-color: rgba(96, 64, 147, 0.706);
         margin: auto;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
       }
       #first > span {
         padding: 0.5rem 1rem;
         background-color: navajowhite;
         font-size: 1.5rem;
-        border-radius: 0.5rem;
-        margin: 0.2rem;
+        margin: 0.5rem;
+        text-align: center;
+        line-height: 2rem;
+        transition: transform 0.5s ease, background-color 0.5s ease,
+          background-color 0.3s ease;
+        z-index: 1;
+        position: relative;
+      }
+
+      #first > span:hover {
+        background-color: #ff004d; 
+        transform: scale(1.1); 
       }
       #first > span:nth-of-type(1) {
         border-top-left-radius: 0.5rem;
@@ -37,83 +49,120 @@
         border-bottom-right-radius: 0.5rem;
       }
       #second {
-        width: 95%;
-        margin: auto;
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-      }
-      input {
-        width: 5rem;
-        height: 2rem;
-        padding: 0.5rem;
-        font-size: 1.5rem;
-        border: 2px solid #1d2b53;
-        border-radius: 0.5rem;
-      }
-      button {
-        padding: 1rem 2rem;
-        margin-left: 1rem;
-        font-size: 1.5rem;
-        font-weight: 600;
-        background-color: #7e2553;
-        color: white;
-        cursor: pointer;
-        border-radius: 0.5rem;
-        border: none;
-        transition: background-color 0.3s, transform 0.3s;
-      }
-      button:hover {
-        background-color: #ff004d;
-        transform: scale(1.05);
-      }
-      button:active {
-        transform: scale(0.95);
-      }
-      #third {
-        background-color: white;
-        width: 95%;
-        height: 5rem;
-        margin: auto;
-        border-bottom-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      #third > span {
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-      #fourth {
-        width: 95%;
-        margin: auto;
-        padding: 2rem;
-        background-color: #faef5d;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #1d2b53;
-        text-align: center;
-        position: relative;
-        bottom: 0;
-      }
-      #fourth .info {
-        max-width: 800px;
-        margin: auto;
-      }
-      #fourth h2 {
-        font-size: 2rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-      #fourth h3 {
-        font-size: 1.5rem;
-        margin-top: 1rem;
-      }
-      #fourth p {
-        font-size: 1.2rem;
-        line-height: 1.5;
-      }
+      width: 95%;
+      margin: 2rem auto; 
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      gap: 1rem;
+    }
+    #second form {
+      display: flex;
+      align-items: center;
+      gap: 1rem; 
+    }
+    input {
+      width: 20rem; 
+      height: 2rem;
+      padding: 0.5rem;
+      font-size: 1.5rem;
+      border: 2px solid #1d2b53;
+      border-radius: 0.5rem;
+      background-color: rgba(96, 64, 147, 0.706);
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background-color: rgba(0, 128, 0, 0.747);
+      cursor: pointer;
+      border-radius: 0.5rem;
+      border: 2px solid #1d2b53;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: rgb(6, 206, 6);
+    }
+
+    #third {
+      background: linear-gradient(90deg, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+      width: 95%;
+      height: 5rem;
+      margin: 2rem auto; /* Center horizontally and add vertical margin */
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #third > span {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .arrow-container {
+      position: absolute;
+      width: 0;
+      height: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .arrow-top {
+      top: -2rem;
+    }
+    .arrow-bottom {
+      bottom: -2rem;
+    }
+    .arrow {
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+    }
+    .arrow-label {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: -10px;
+    }
+    .arrow-top .arrow {
+      border-bottom: 20px solid black;
+      margin-bottom: 5px;
+    }
+    .arrow-bottom .arrow {
+      border-top: 20px solid black;
+      margin-top: 5px;
+    }
+    #fourth {
+      width: 95%;
+      margin: 2rem auto; /* Center horizontally and add vertical margin */
+      padding: 2rem;
+      background-color: antiquewhite;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      color: #1d2b53;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+    }
+    #fourth .info {
+      max-width: 800px;
+      margin: auto;
+    }
+    #fourth h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    #fourth h3 {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+    }
+    #fourth p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
     </style>
   </head>
   <body>
@@ -136,38 +185,37 @@
       <!-- Second Section start -->
       <section id="second">
         <form action="" id="form">
-          <input type="number" required id="push" placeholder="0" value="" />
+          <input type="number" required id="push" placeholder="0" />
           <button type="submit">Push</button>
         </form>
         <button id="pop">Pop</button>
         <button id="peek">Peek</button>
       </section>
       <!-- Second Section end -->
-\
-     <!-- Fourth Section start -->
-<section id="fourth">
-  <div class="info">
-    <h2>Queue Data Structure</h2>
-    <p>
-      A queue is a linear data structure that follows the First In, First Out (FIFO) principle. This means that the first element added to the queue will be the first one to be removed. You can think of it like a line at a ticket counter; people enter the line from the back and are served from the front.
-    </p>
-    <h3>Key Operations</h3>
-    <p>
-      - Enqueue: Adds an element to the end of the queue.<br>
-      - Dequeue: Removes the element from the front of the queue.<br>
-      - Front: Retrieves the front element of the queue without removing it.<br>
-      - isEmpty: Checks whether the queue is empty or not.
-    </p>
-    <h3>Time Complexity</h3>
-    <p>
-      - Enqueue: O(1)<br>
-      - Dequeue: O(1)<br>
-      - Front: O(1)
-    </p>
-  </div>
-</section>
-<!-- Fifth Section end -->
-
+      
+      <!-- Fourth Section start -->
+      <section id="fourth">
+        <div class="info">
+          <h2>Stack Data Structure</h2>
+          <p>
+            A stack is a linear data structure that follows the Last In, First Out (LIFO) principle. This means that the last element added to the stack will be the first one to be removed. Think of it like a stack of plates where you add and remove plates from the top.
+          </p>
+          <h3>Key Operations</h3>
+          <p>
+            - Push: Adds an element to the top of the stack.<br>
+            - Pop: Removes the element from the top of the stack.<br>
+            - Peek: Retrieves the top element of the stack without removing it.<br>
+            - isEmpty: Checks whether the stack is empty or not.
+          </p>
+          <h3>Time Complexity</h3>
+          <p>
+            - Push: O(1)<br>
+            - Pop: O(1)<br>
+            - Peek: O(1)
+          </p>
+        </div>
+      </section>
+      <!-- Fourth Section end -->
     </div>
     <script src="./algo_scripts.js"></script>
     <script>
