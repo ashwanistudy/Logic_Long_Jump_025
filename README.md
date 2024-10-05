@@ -1,2 +1,2 @@
 # Logic_Long_Jump_025
-Netlify - dsa-visualiserr.netlify.app
+Netlify - https://dsa-visualiserr.netlify.app/
